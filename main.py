@@ -23,6 +23,10 @@ robots = [
     }
 ]
 
+robot_put_args.reqparse = reqparse.RequestParser()
+robot_put_args.reqparse.add_argument('filename', type=str, location='json')
+robot_put_args.reqparse.add_argument('name', type=str, location='json')
+
 robot_attributes = {
     'filename': fields.String,
     'name': fields.String, 
@@ -65,11 +69,6 @@ class RobotList(Resource):
 
 class Robot(Resource):
 
-    def __init__(self):
-        self.reqparse = reqparse.RequestParser()
-        self.reqparse.add_argument('name', type=str, location='json')
-        super(Robot, self).__init__()
-
     def get(self, filename, download=None):
         robot = [robot for robot in robots if robot['filename'] == filename]
         if len(robot) == 0:
@@ -86,7 +85,7 @@ class Robot(Resource):
         if len(robot) == 0:
             abort(404, message="Cannot find this robot $filename")
         robot = robot[0]
-        args = self.reqparse.parse_args()
+        args = robot_put_args.parse_args()
         for key, val in args.items():
 
             if val is not None:

@@ -24,8 +24,8 @@ robots = [
 ]
 
 robot_put_args = reqparse.RequestParser()
-robot_put_args.add_argument('filename', type=str, location='json')
-robot_put_args.add_argument('name', type=str, location='json')
+robot_put_args.add_argument('filename', type=str, help='the filename of robot')
+robot_put_args.add_argument('name', type=str, help='name of the robot')
 
 robot_attributes = {
     'filename': fields.String,
@@ -89,7 +89,8 @@ class Robot(Resource):
         for key, val in args.items():
             if val is not None:
                 robot[key] = val
-        return {"robot": marshal(robot, robot_attributes)}
+        return {filename: args}
+        #return {"robot": marshal(robot, robot_attributes)}
 
     def delete(self, filename):
     	for idx, robot in enumerate(robots):

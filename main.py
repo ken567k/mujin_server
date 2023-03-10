@@ -18,6 +18,7 @@ robots = [
     {
         'filename': "testRobot2",
         'name': 'robot2',
+        'filecontent' : '',
         # 'isRobot': True
     }
 ]
@@ -25,7 +26,7 @@ robots = [
 robot_attributes = {
     'filename': fields.String,
     'name': fields.String, 
-    'filecontent' : fields.String,
+    #'filecontent' : fields.String,
     # "isRobot": fields.Boolean,
 }
 

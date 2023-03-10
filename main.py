@@ -23,7 +23,7 @@ robots = [
 robot_attributes = {
     'filename': fields.String,
     'name': fields.String,
-  	"isRobot": fields.boolean,
+    "isRobot": fields.boolean,
 }
 
 class RobotList():
@@ -42,18 +42,18 @@ class RobotList():
 
 
 class Robot(Resource):
-	def get(self, filename):
+    def get(self, filename):
         robot = [robot for robot in robots if robot['filename'] == filename]
         if len(robot) == 0:
             abort(404, message="Cannot find this robot $filename")
         return {'robot': marshal(robot[0], robot_attributes)}
 
 
-	def put(self, filename):
-		return {"data": "Posted"}
+    def put(self, filename):
+        return {"data": "Posted"}
 
-	def delete(self, filename):
-		return
+    def delete(self, filename):
+        return
 
 api.add_resource(RobotList, '/api/robot', endpoint='robots')
 api.add_resource(Robot, '/api/robot/<string:filename>', endpoint='robot')
@@ -61,4 +61,4 @@ api.add_resource(Robot, '/api/robot/<string:filename>', endpoint='robot')
 
 
 if __name__ == "__main__":
-	app.run(debug=True)
+    app.run(debug=True)

@@ -9,21 +9,23 @@ api = Api(app)
 
 
 robots = [
-    # {
-    #     'filename': 'testRobot1',
-    #     'name': 'robot1',
-    #     'isRobot': True
-    # },
-    # {
-    #     'filename': "testRobot2",
-    #     'name': 'robot2',
-    #     'isRobot': True
-    # }
+    {
+        'filename': 'testRobot1',
+        'name': 'robot1',
+        'filecontent' : '',
+        # 'isRobot': True
+    },
+    {
+        'filename': "testRobot2",
+        'name': 'robot2',
+        # 'isRobot': True
+    }
 ]
 
 robot_attributes = {
     'filename': fields.String,
-    # 'name': fields.String,
+    'name': fields.String, 
+    'filecontent' : fields.String,
     # "isRobot": fields.Boolean,
 }
 
@@ -31,11 +33,13 @@ robot_attributes = {
 def readRobotJson(filename):
     f = open(filename)
 
+    file_content = json.dumps(filename)
     data = json.load(f)
-    robots['filename'] = data
 
-    # for i in data['bodies']:
-    # 	print(i)
+    name = data['bodies']['name']
+
+    robot_obj = {'filename': filename, 'name': name, 'filecontent': file_content}
+    robots.append(robot_obj)
 
 
 class RobotList(Resource):
@@ -66,7 +70,7 @@ class Robot(Resource):
 
     def delete(self, filename):
     	for idx, robot in enumerate(robots):
-    		if robot['filename'] = filename:
+    		if robot['filename'] == filename:
     			robots.pop(idx)
 
 

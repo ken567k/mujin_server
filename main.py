@@ -65,9 +65,9 @@ class Robot(Resource):
         if len(robot) == 0:
             abort(404, message="Cannot find this robot $filename")
 
-        if(download == True)
+        if(download == True):
             return {'robot': marshal(robot[0], 'filecontent')}
-        else
+        else:
             return {'robot': marshal(robot[0], robot_attributes)}
 
 

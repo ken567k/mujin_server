@@ -1,3 +1,5 @@
+#! /usr/bin/env python3
+
 from flask import Flask
 from flask_restful import Api, Resource
 
@@ -6,7 +8,7 @@ api = Api(app)
 
 class RobotServer(Resource):
 	def get(self):
-		return {"robot 1"}
+		return {"data": "robot 1"}
 
 api.add_resource(RobotServer, "/api")
 

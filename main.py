@@ -10,7 +10,13 @@ class RobotServer(Resource):
 	def get(self):
 		return {"data": "robot 1"}
 
-api.add_resource(RobotServer, "/api")
+	def get(self, name):
+		return {"data": name}
+
+	def post(self):
+		return {"data": "Posted"}
+
+api.add_resource(RobotServer, "/api/robot/<string:name>")
 
 if __name__ == "__main__":
 	app.run(debug=True)

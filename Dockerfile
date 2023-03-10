@@ -61,7 +61,6 @@ RUN git clone https://github.com/pybind/pybind11.git  && \
 #   make install
 
 RUN ln -sf /usr/include/eigen3/Eigen /usr/include/Eigen
-RUN export OPENRAVE_PLUGINS="/usr/local/share/openrave-0.9/plugins:${OPENRAVE_PLUGINS}"
 
 
 RUN apt-get -y install curl
@@ -97,3 +96,7 @@ RUN cd /app/open_rave_src/build && \
         #-DCMAKE_BUILD_TYPE=RelWithDebInfo && \
     make -j4 && \
     make install
+
+RUN export OPENRAVE_PLUGINS="/usr/local/share/openrave-0.9/plugins:${OPENRAVE_PLUGINS}"
+RUN export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$(openrave-config --python-dir)/openravepy/_openravepy_
+RUN export PYTHONPATH=$PYTHONPATH:$(openrave-config --python-dir)

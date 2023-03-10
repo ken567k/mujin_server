@@ -28,14 +28,6 @@ RUN cd rapidjson &&  mkdir build && cd build && \
     make -j4 && \
     make install
 
-#RUN git clone https://github.com/pybind/pybind11.git
-#RUN cd pybind11 && \
-#   git cherry-pick 94824d68a037d99253b92a5b260bb04907c42355 98c9f77e5481af4cbc7eb092e1866151461e3508  && \
-#   mkdir build && cd build && \
-#   cmake .. && \
-#   make -j4 && \
-#   make install
-
 RUN git config --global user.email "docker@example.com"
 RUN git config --global user.name "docker"
 RUN git clone https://github.com/pybind/pybind11.git  && \
@@ -70,7 +62,6 @@ RUN curl https://bootstrap.pypa.io/get-pip.py --output get-pip.py && \
     rm get-pip.py
 
 RUN apt-get -y install libboost-all-dev libboost-python-dev
-#libboost-python-dev=boost_1_58_0
 
 # Set the working directory
 WORKDIR /app
@@ -78,22 +69,10 @@ WORKDIR /app
 # Copy required files
 COPY /. open_rave_src
 
-# Build the application with cmake
-#RUN cd /app/open_rave_src && \
-#   cmake .
-#RUN mkdir /app/open_rave_src/build && cd /app/open_rave_src/build && \
-#   cmake .
-
-#RUN cd /app/open_rave_src/build && \
-#   cmake .. && \
-#   make install
-
+# Build the openrave with cmake
 RUN cd /app/open_rave_src/build && \
     cmake -DODE_USE_MULTITHREAD=ON -DOSG_DIR=/usr/local/lib64/ \
         -DUSE_PYBIND11_PYTHON_BINDINGS:BOOL=TRUE              .. && \
-        #-DBoost_NO_BOOST_CMAKE=1 .. &&\
-        #-DBoost_NO_WARN_NEW_VERSIONS=1 \
-        #-DCMAKE_BUILD_TYPE=RelWithDebInfo && \
     make -j4 && \
     make install
 

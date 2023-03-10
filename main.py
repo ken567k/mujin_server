@@ -33,8 +33,8 @@ robot_attributes = {
 def readRobotJson(filename):
     f = open(filename)
 
-    file_content = json.dumps(filename)
     data = json.load(f)
+    file_content = json.dumps(data)
 
     name = data['bodies'][0]['name']
 

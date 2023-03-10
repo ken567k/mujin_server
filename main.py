@@ -93,9 +93,11 @@ class Robot(Resource):
         #return {"robot": marshal(robot, robot_attributes)}
 
     def delete(self, filename):
-    	for idx, robot in enumerate(robots):
-    		if robot['filename'] == filename:
-    			robots.pop(idx)
+        robot = [robot for robot in robots if robot['filename'] == filename]
+        if len(robot) == 0:
+            abort(404, message="Cannot find this robot $filename")
+        robots.remove(robot[0])
+        return {'result': True}
 
 
 api.add_resource(RobotList, '/api/robot', endpoint='robots')

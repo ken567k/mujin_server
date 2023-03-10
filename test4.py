@@ -2,7 +2,7 @@
 
 import requests
 
-#Test the second case of GET a specific robot
+#Test the second case of GET a specific robot, changes the name to adidas
 
 BASE = "http://127.0.0.1:5000/"
 

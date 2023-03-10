@@ -61,7 +61,7 @@ class RobotList(Resource):
         return  {'robot': [marshal(robot, robot_attributes) for robot in robots]}
 
     def post(self):
-        args = robot_put_args.parse_args()
+        args = robot_post_args.parse_args()
         response = readRobotJson(args['filepath'])
         return response
 

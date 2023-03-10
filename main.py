@@ -27,8 +27,8 @@ robot_attributes = {
 }
 
 class RobotList():
-	def get(self):
-		return  {'robot': [marshal(robot, robot_attributes) for robot in robots]}
+    def get(self):
+        return  {'robot': [marshal(robot, robot_attributes) for robot in robots]}
 
     def post(self):
         args = self.reqparse.parse_args()

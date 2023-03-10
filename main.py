@@ -67,7 +67,6 @@ class Robot(Resource):
 
     def __init__(self):
         self.reqparse = reqparse.RequestParser()
-        self.reqparse.add_argument('filename', type=str, location='json')
         self.reqparse.add_argument('name', type=str, location='json')
         super(Robot, self).__init__()
 

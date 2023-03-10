@@ -31,9 +31,10 @@ robot_attributes = {
 }
 
 
-def readRobotJson(filename):
-    f = open(filename)
+def readRobotJson(filepath):
+    f = open(filepath)
 
+    filename = filepath.split('/')[1]
     data = json.load(f)
     file_content = json.dumps(data)
 

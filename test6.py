@@ -2,11 +2,11 @@
 
 import requests
 
-#Test the DELETE /api/robot/filename
+#Test the second case of POST a new robot, changes the name to adidas
 
 BASE = "http://127.0.0.1:5000/"
 
-response = requests.delete(BASE + "api/robot/puma.json")
+response = requests.post(BASE + "api/robot", {"filepath": "robots/kawada.json"})
 print(response.json())
 
 response = requests.get(BASE + "api/robot")

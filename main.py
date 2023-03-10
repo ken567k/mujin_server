@@ -27,6 +27,9 @@ robot_put_args = reqparse.RequestParser()
 robot_put_args.add_argument('filename', type=str, help='the filename of robot')
 robot_put_args.add_argument('name', type=str, help='name of the robot')
 
+robot_post_args = reqparse.RequestParser()
+robot_post_args.add_argument('filepath', type=str, help='the filepath of robot')
+
 robot_attributes = {
     'filename': fields.String,
     'name': fields.String, 
@@ -50,6 +53,7 @@ def readRobotJson(filepath):
 
     robot_obj = {'filename': filename, 'name': name, 'filecontent': file_content}
     robots.append(robot_obj)
+    return {'robot': marshal(robot_obj, robot_attributes)}
 
 
 class RobotList(Resource):
@@ -57,14 +61,9 @@ class RobotList(Resource):
         return  {'robot': [marshal(robot, robot_attributes) for robot in robots]}
 
     def post(self):
-        args = self.reqparse.parse_args()
-        robot = {
-            'filename': args['filename'],
-            'name': args['name'],
-            'isRobot': args['isRobot'],
-        }
-        robots.append(robot)
-        return {'robot': marshal(robot, robot_attributes)}, 201
+        args = robot_put_args.parse_args()
+        response = readRobotJson(args['filepath'])
+        return response
 
 
 class Robot(Resource):
@@ -89,8 +88,8 @@ class Robot(Resource):
         for key, val in args.items():
             if val is not None:
                 robot[key] = val
-        return {filename: args}
-        #return {"robot": marshal(robot, robot_attributes)}
+        #return {filename: args}
+        return {"robot": marshal(robot, robot_attributes)}
 
     def delete(self, filename):
         robot = [robot for robot in robots if robot['filename'] == filename]

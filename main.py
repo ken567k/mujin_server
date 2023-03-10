@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_restful import Api, Resource
 
-app = Flast(__name__)
+app = Flask(__name__)
 api = Api(app)
 
 class RobotServer(Resource):

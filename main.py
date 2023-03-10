@@ -24,8 +24,8 @@ robots = [
 ]
 
 robot_put_args = reqparse.RequestParser()
-robot_put_args.reqparse.add_argument('filename', type=str, location='json')
-robot_put_args.reqparse.add_argument('name', type=str, location='json')
+robot_put_args.add_argument('filename', type=str, location='json')
+robot_put_args.add_argument('name', type=str, location='json')
 
 robot_attributes = {
     'filename': fields.String,

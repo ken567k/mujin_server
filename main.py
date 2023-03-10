@@ -30,6 +30,10 @@ robot_attributes = {
     # "isRobot": fields.Boolean,
 }
 
+robot_download = {
+    'filecontent': fields.String,
+}
+
 
 def readRobotJson(filepath):
     f = open(filepath)
@@ -66,7 +70,7 @@ class Robot(Resource):
             abort(404, message="Cannot find this robot $filename")
 
         if(download == 'download'):
-            return {'robot': marshal(robot[0], 'filecontent')}
+            return {'robot': marshal(robot[0], robot_download)}
         else:
             return {'robot': marshal(robot[0], robot_attributes)}
 

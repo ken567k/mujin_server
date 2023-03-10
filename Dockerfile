@@ -79,3 +79,5 @@ RUN cd /app/open_rave_src/build && \
 RUN export OPENRAVE_PLUGINS="/usr/local/share/openrave-0.9/plugins:${OPENRAVE_PLUGINS}"
 RUN export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$(openrave-config --python-dir)/openravepy/_openravepy_
 RUN export PYTHONPATH=$PYTHONPATH:$(openrave-config --python-dir)
+
+CMD python3 /app/open_rave_src/mujin_server/main.py

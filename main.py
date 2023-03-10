@@ -76,7 +76,15 @@ class Robot(Resource):
 
 
     def put(self, filename):
-        return {"data": "Posted"}
+        robot = [robot for robot in robots if robot['filename'] == filename]
+        if len(robot) == 0:
+            abort(404, message="Cannot find this robot $filename")
+        robot = robot[0]
+        args = self.reqparse.parse_args()
+        for key, val in args.items():
+        	if val is not None:
+        		robot[key] = val
+        return {"robot": marshal(robot[0], robot_attributes)}
 
     def delete(self, filename):
     	for idx, robot in enumerate(robots):

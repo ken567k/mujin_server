@@ -58,7 +58,7 @@ RUN ln -sf /usr/include/eigen3/Eigen /usr/include/Eigen
 RUN apt-get -y install curl
 RUN curl https://bootstrap.pypa.io/get-pip.py --output get-pip.py && \
     python3 get-pip.py && \
-    pip install ipython h5py numpy scipy wheel && \
+    pip install ipython h5py numpy scipy wheel flask flask_restful requests&& \
     rm get-pip.py
 
 RUN apt-get -y install libboost-all-dev libboost-python-dev

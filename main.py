@@ -1,5 +1,6 @@
 #! /usr/bin/env python3
 
+import json
 from flask import Flask, jsonify, abort, make_response
 from flask_restful import Api, Resource, reqparse, fields, marshal
 
@@ -26,7 +27,17 @@ robot_attributes = {
     "isRobot": fields.Boolean,
 }
 
-class RobotList():
+
+def readRobotJson(jsonfilename):
+    f = open(jsonfilename)
+
+    data = json.load(f)
+
+    for i in data['bodies']:
+    	print i
+
+
+class RobotList(Resource):
     def get(self):
         return  {'robot': [marshal(robot, robot_attributes) for robot in robots]}
 
@@ -61,4 +72,5 @@ api.add_resource(Robot, '/api/robot/<string:filename>', endpoint='robot')
 
 
 if __name__ == "__main__":
+	readRobotJson('robots/puma.json')
     app.run(debug=True)

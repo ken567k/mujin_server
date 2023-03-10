@@ -23,7 +23,7 @@ robots = [
 robot_attributes = {
     'filename': fields.String,
     'name': fields.String,
-    "isRobot": fields.boolean,
+    "isRobot": fields.Boolean,
 }
 
 class RobotList():

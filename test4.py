@@ -6,5 +6,5 @@ import requests
 
 BASE = "http://127.0.0.1:5000/"
 
-response = requests.get(BASE + "api/robot/puma.json", {"name": "adidas"})
+response = requests.put(BASE + "api/robot/puma.json", {"filename": "puma.json", "name": "adidas"})
 print(response.json())

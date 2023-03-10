@@ -9,32 +9,33 @@ api = Api(app)
 
 
 robots = [
-    {
-        'filename': 'testRobot1',
-        'name': 'robot1',
-        'isRobot': True
-    },
-    {
-        'filename': "testRobot2",
-        'name': 'robot2',
-        'isRobot': True
-    }
+    # {
+    #     'filename': 'testRobot1',
+    #     'name': 'robot1',
+    #     'isRobot': True
+    # },
+    # {
+    #     'filename': "testRobot2",
+    #     'name': 'robot2',
+    #     'isRobot': True
+    # }
 ]
 
 robot_attributes = {
     'filename': fields.String,
-    'name': fields.String,
-    "isRobot": fields.Boolean,
+    # 'name': fields.String,
+    # "isRobot": fields.Boolean,
 }
 
 
-def readRobotJson(jsonfilename):
-    f = open(jsonfilename)
+def readRobotJson(filename):
+    f = open(filename)
 
     data = json.load(f)
+    robots['filename'] = data
 
-    for i in data['bodies']:
-    	print i
+    # for i in data['bodies']:
+    # 	print(i)
 
 
 class RobotList(Resource):
@@ -64,7 +65,10 @@ class Robot(Resource):
         return {"data": "Posted"}
 
     def delete(self, filename):
-        return
+    	for idx, robot in enumerate(robots):
+    		if robot['filename'] = filename:
+    			robots.pop(idx)
+
 
 api.add_resource(RobotList, '/api/robot', endpoint='robots')
 api.add_resource(Robot, '/api/robot/<string:filename>', endpoint='robot')
@@ -72,5 +76,5 @@ api.add_resource(Robot, '/api/robot/<string:filename>', endpoint='robot')
 
 
 if __name__ == "__main__":
-	readRobotJson('robots/puma.json')
+    readRobotJson('robots/puma.json')
     app.run(debug=True)

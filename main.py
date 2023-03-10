@@ -36,7 +36,7 @@ def readRobotJson(filename):
     file_content = json.dumps(filename)
     data = json.load(f)
 
-    name = data['bodies']['name']
+    name = data['bodies'][0]['name']
 
     robot_obj = {'filename': filename, 'name': name, 'filecontent': file_content}
     robots.append(robot_obj)

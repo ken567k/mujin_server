@@ -64,6 +64,13 @@ class RobotList(Resource):
 
 
 class Robot(Resource):
+
+    def __init__(self):
+        self.reqparse = reqparse.RequestParser()
+        self.reqparse.add_argument('filename', type=str, location='json')
+        self.reqparse.add_argument('name', type=str, location='json')
+        super(Robot, self).__init__()
+
     def get(self, filename, download=None):
         robot = [robot for robot in robots if robot['filename'] == filename]
         if len(robot) == 0:
@@ -82,8 +89,9 @@ class Robot(Resource):
         robot = robot[0]
         args = self.reqparse.parse_args()
         for key, val in args.items():
-        	if val is not None:
-        		robot[key] = val
+
+            if val is not None:
+                robot[key] = val
         return {"robot": marshal(robot[0], robot_attributes)}
 
     def delete(self, filename):

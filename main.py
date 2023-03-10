@@ -60,12 +60,12 @@ class RobotList(Resource):
 
 
 class Robot(Resource):
-    def get(self, filename, download=False):
+    def get(self, filename, download=None):
         robot = [robot for robot in robots if robot['filename'] == filename]
         if len(robot) == 0:
             abort(404, message="Cannot find this robot $filename")
 
-        if(download == True):
+        if(download == 'download'):
             return {'robot': marshal(robot[0], 'filecontent')}
         else:
             return {'robot': marshal(robot[0], robot_attributes)}
@@ -81,7 +81,7 @@ class Robot(Resource):
 
 
 api.add_resource(RobotList, '/api/robot', endpoint='robots')
-api.add_resource(Robot, '/api/robot/<string:filename>', '/api/robot/<string:filename>/<Boolean:download>', endpoint='robot')
+api.add_resource(Robot, '/api/robot/<string:filename>', '/api/robot/<string:filename>/<string:download>', endpoint='robot')
 
 
 

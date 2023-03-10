@@ -87,10 +87,9 @@ class Robot(Resource):
         robot = robot[0]
         args = robot_put_args.parse_args()
         for key, val in args.items():
-
             if val is not None:
                 robot[key] = val
-        return {"robot": marshal(robot[0], robot_attributes)}
+        return {"robot": marshal(robot, robot_attributes)}
 
     def delete(self, filename):
     	for idx, robot in enumerate(robots):

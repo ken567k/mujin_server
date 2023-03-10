@@ -45,7 +45,7 @@ robot_download = {
 def readRobotJson(filepath):
     f = open(filepath)
 
-    filename = filepath.split('/')[1]
+    filename = filepath.split('/')[-1]
     data = json.load(f)
     file_content = json.dumps(data)
 

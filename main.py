@@ -33,8 +33,6 @@ robot_post_args.add_argument('filepath', type=str, help='the filepath of robot')
 robot_attributes = {
     'filename': fields.String,
     'name': fields.String, 
-    #'filecontent' : fields.String,
-    # "isRobot": fields.Boolean,
 }
 
 robot_download = {
@@ -71,7 +69,7 @@ class Robot(Resource):
     def get(self, filename, download=None):
         robot = [robot for robot in robots if robot['filename'] == filename]
         if len(robot) == 0:
-            abort(404, message="Cannot find this robot $filename")
+            abort(404, {"message"="Cannot find this robot $filename"})
 
         if(download == 'download'):
             return {'robot': marshal(robot[0], robot_download)}
@@ -82,7 +80,7 @@ class Robot(Resource):
     def put(self, filename):
         robot = [robot for robot in robots if robot['filename'] == filename]
         if len(robot) == 0:
-            abort(404, message="Cannot find this robot $filename")
+            abort(404, {"message"="Cannot find this robot $filename"})
         robot = robot[0]
         args = robot_put_args.parse_args()
         for key, val in args.items():
@@ -94,7 +92,7 @@ class Robot(Resource):
     def delete(self, filename):
         robot = [robot for robot in robots if robot['filename'] == filename]
         if len(robot) == 0:
-            abort(404, message="Cannot find this robot $filename")
+            abort(404, {"message"="Cannot find this robot $filename"})
         robots.remove(robot[0])
         return {'result': True}
 

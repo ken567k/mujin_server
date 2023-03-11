@@ -6,7 +6,7 @@ import requests
 
 BASE = "http://127.0.0.1:5000/"
 
-response = requests.post(BASE + "api/robot", {"filepath": "robots/kawada.json"})
+response = requests.post(BASE + "api/robot", json={"filepath": "robots/kawada.json"})
 print(response.json())
 
 response = requests.get(BASE + "api/robot")
